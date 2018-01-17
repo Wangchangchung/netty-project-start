@@ -15,7 +15,8 @@ import java.util.Date;
  */
 public class TimeServerHandler implements Runnable {
 
-    private Logger logger = LoggerFactory.getLogger(TimeServerHandler.class);
+    private  static Logger logger = LoggerFactory.getLogger(TimeServerHandler.class);
+
     private Socket socket;
 
     public TimeServerHandler(Socket socket) {
@@ -27,24 +28,28 @@ public class TimeServerHandler implements Runnable {
     public void run() {
         BufferedReader in = null;
         PrintWriter out = null;
+
         try {
             // 得到输入流
             in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             // 得到输出流
             out = new PrintWriter(this.socket.getOutputStream(), true);
+
             String currentTime = null;
             String body = null;
+
             while (true) {
                 body = in.readLine();
                 if (body == null) {
                     break;
                 }
                 //输出 请求的信息
-                logger.info("The  time server receive order:{}", body);
+                logger.info("The  time server receive order:{}" , body);
                 // 执行时间
                 currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString()
                         : "DAD ORDER";
-                logger.info(currentTime);
+
+                out.println(currentTime);
             }
 
         } catch (IOException e) {
@@ -56,10 +61,12 @@ public class TimeServerHandler implements Runnable {
                     e1.printStackTrace();
                 }
             }
+
             if (out != null) {
                 out.close();
                 out = null;
             }
+
             if (this.socket != null) {
                 try {
                     this.socket.close();

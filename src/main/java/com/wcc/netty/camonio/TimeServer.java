@@ -36,10 +36,12 @@ public class TimeServer {
             serverSocket = new ServerSocket(port);
             logger.info("The time Server is start in port :{}", port );
             Socket socket = null;
-            TimeServerHandlerExecutePool singleExecutePool = new TimeServerHandlerExecutePool(50, 10000);
+            TimeServerHandlerExecutePool singleExecutePool = new
+                    TimeServerHandlerExecutePool(50, 10000);
             while (true){
                 socket = serverSocket.accept();
                 singleExecutePool.execute(new TimeServerHandler(socket));
+                logger.info("------------------");
             }
 
         } catch (IOException e) {
