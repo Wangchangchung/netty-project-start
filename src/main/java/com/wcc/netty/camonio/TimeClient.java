@@ -1,5 +1,8 @@
 package com.wcc.netty.camonio;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -13,12 +16,13 @@ import java.net.Socket;
  * 伪异步I/O 通信框架采取了线程池实现, 因此避免可为每一个请求
  * 创建一个独立线程造成的线程资源耗尽问题, 但是由于它层的通信依然
  * 采用同步阻塞模型，因此无法从根本上解决BIO 的问题。
- *
  */
 public class TimeClient {
 
-    public static  void  main(String[] args) throws FileNotFoundException {
-        int port  = 8080;
+    private static Logger logger = LoggerFactory.getLogger(TimeClient.class);
+
+    public static void main(String[] args) throws FileNotFoundException {
+        int port = 8080;
         String addr = "127.0.0.1";
         if (args != null && args.length > 0) {
             try {
@@ -28,48 +32,45 @@ public class TimeClient {
 
             }
         }
+        Socket socket = null;
+        BufferedReader in = null;
+        PrintWriter out = null;
+        try {
+            socket = new Socket(addr, port);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
 
-            Socket socket = null;
-            BufferedReader  in = null;
-            PrintWriter out = null;
+            logger.info("QUERY TIME ORDER");
+            logger.info("Send order 2 server succeed.");
+            String resp = in.readLine();
+            logger.info("Now is:" + resp);
 
-            try {
-                socket = new Socket(addr, port);
-                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                out = new PrintWriter(socket.getOutputStream(), true);
-
-                out.println("QUERY TIME ORDER");
-                System.out.println("Send order 2 server succeed.");
-                String resp = in.readLine();
-
-                System.out.println("Now is:" + resp);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-                //关闭操作
-                if (out != null){
-                    out.close();
-                    out = null;
-                }
-                if (in != null){
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    in = null;
-                }
-
-                if (socket != null){
-                    try {
-                        socket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    socket = null;
-                }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //关闭操作
+            if (out != null) {
+                out.close();
+                out = null;
             }
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                in = null;
+            }
+
+            if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                socket = null;
+            }
+        }
         /*
         InputStream  inputStream = new FileInputStream("D://file.txt");
         OutputStream outputStream = new FileOutputStream("/");

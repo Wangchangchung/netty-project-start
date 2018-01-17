@@ -1,5 +1,8 @@
 package com.wcc.netty.camonio;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,9 +17,10 @@ import java.net.Socket;
  * 这意味者当对方发送请求或者应答消息比较缓慢，或者网络传输较慢的时候，读取输入流一方的通信线程将被长时间阻塞，
  * 如果对方要60s才能够将数据发送完成，读取一方的I/O线程也将会被同步阻塞60s, 在此期间，其他接入消息只能在消息队列中排队
  * 伪异步I/O实际上仅仅是堆之前I/O线程模型的一个简单优化, 它无法从根本上解决同步I/O导致的通信线程阻塞的问题
- * 
+ *
  */
 public class TimeServer {
+    private static Logger logger = LoggerFactory.getLogger(TimeServer.class);
 
     public static void main(String[] args){
         int port = 8080;
@@ -30,7 +34,7 @@ public class TimeServer {
         ServerSocket  serverSocket = null;
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("The time Server is start in port : " + port );
+            logger.info("The time Server is start in port :{}", port );
             Socket socket = null;
             TimeServerHandlerExecutePool singleExecutePool = new TimeServerHandlerExecutePool(50, 10000);
             while (true){
@@ -42,7 +46,7 @@ public class TimeServer {
             e.printStackTrace();
         }finally {
             if (serverSocket != null){
-                System.out.println("The time server close");
+                logger.info("The time server close");
                 try {
                     serverSocket.close();
                 } catch (IOException e) {
