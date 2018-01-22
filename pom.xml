@@ -34,7 +34,6 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-core</artifactId>
     </dependency>
-
     <!-- logging -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -51,31 +50,26 @@
       <artifactId>log4j-slf4j-impl</artifactId>
       <scope>runtime</scope>
     </dependency>
-
     <!-- testing -->
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/io.netty/netty -->
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty</artifactId>
       <version>3.10.5.Final</version>
     </dependency>
-
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.16</version>
     </dependency>
-
   </dependencies>
 
   <build>
     <defaultGoal>install</defaultGoal>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -94,7 +88,6 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
-
       <!-- Allows the example to be run via 'mvn compile exec:java' -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -105,7 +98,6 @@
           <includePluginDependencies>false</includePluginDependencies>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 
