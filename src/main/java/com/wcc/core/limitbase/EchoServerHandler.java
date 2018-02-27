@@ -16,7 +16,7 @@ public class EchoServerHandler  extends ChannelHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
         String  body  = (String) msg;
-        System.out.println("this is " + (++count) +" times receive client :[　" + body +"]");
+        System.out.println("this is " + (++count) +" times receive client :[" + body +"]");
         body += "$_";
         ByteBuf echo = Unpooled.copiedBuffer(body.getBytes());
 
