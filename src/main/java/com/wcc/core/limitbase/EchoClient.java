@@ -12,8 +12,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
-
-
 /**
  * Created by charse on 17-8-24.
  */
@@ -38,7 +36,6 @@ public class EchoClient {
 
                             socketChannel.pipeline().addLast(new EchoClientHandler());
                         }
-
                     });
 
             //　发起异步连接操作

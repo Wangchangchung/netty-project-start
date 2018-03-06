@@ -35,7 +35,7 @@ public class EchoServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            //首先创建分隔符缓冲对象ByteBuf,这里使用 "$_"作为 分隔符 ,将其加入到ChannelPipeline中.
+                            //首先创建分隔符缓冲对象ByteBuf,这里使用 "$_"作为分隔符 ,将其加入到ChannelPipeline中.
                             ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
                             socketChannel.pipeline().addLast(
                                     new DelimiterBasedFrameDecoder(1024, delimiter));
