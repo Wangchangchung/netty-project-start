@@ -28,7 +28,7 @@ public class HttpFileServer {
                         socketChannel.pipeline().addLast("http-encoder", new HttpResponseEncoder());
                         socketChannel.pipeline().addLast("http-chunked", new ChunkedWriteHandler());
                         socketChannel.pipeline().addLast("fileServerHandler", new HttpFileServerHandler());
-                        
+
                     }
                 });
     }
