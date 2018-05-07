@@ -8,13 +8,13 @@
 	</appender>
 
 	<appender name="SYS_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${catalina.base}/logs/pos.base.info.log</file>
+		<file>${catalina.base}/logs/netty.project.start.info.log</file>
 		<append>true</append>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>INFO</level>
 		</filter>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${catalina.base}/logs/pos.base.info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>${catalina.base}/logs/netty.project.start.info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>100MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>
@@ -27,7 +27,7 @@
 	</appender>
 
 	<appender name="SYS_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${catalina.base}/logs/pos.base.error.log</file>
+		<file>${catalina.base}/logs/netty.project.start.error.log</file>
 		<append>true</append>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>ERROR</level>
@@ -35,7 +35,7 @@
 			<onMismatch>DENY</onMismatch>
 		</filter>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${catalina.base}/logs/pos.base.error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>${catalina.base}/logs/netty.project.start.error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>100MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>
